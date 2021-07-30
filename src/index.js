@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Todo from '../components/Todo.js'
+import Todos from './components/Todos.js'
 
 function Main() {
     return (
         <div>
-            <Todo/>
+            <Todos/>
         </div>
     )
 }
