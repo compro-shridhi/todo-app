@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import Todos from './components/Todos.js'
 
-function Main() {
-    return (
-        <div>
-            <Todos/>
-        </div>
-    )
-}
-
-ReactDOM.render(<Main/>,document.getElementById('root'));
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <Todos />
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
