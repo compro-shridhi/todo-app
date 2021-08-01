@@ -13,12 +13,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       addTodo: (obj) => dispatch(addTodos(obj)),
+      removeTodo: (id) => dispatch(removeTodos(id)),
+      updateTodo: (obj) => dispatch(updateTodos(obj)),
+      completeTodo: (id) => dispatch(completeTodos(id)),
     };
   };
 
 const Todos = (props) => {
     const [todo, settodo] = useState("");
-    console.log("props from store", props);
+    // console.log("props from store", props);
 
     // will call the addTodo reducer to add an item in list
     const add = () =>{
@@ -40,12 +43,6 @@ const Todos = (props) => {
             <input type="text" onChange={e=>settodo(e.target.value)} value={todo}></input>
             <br/>
             <button onClick={()=>add()}>ADD</button>
-            <ul>
-                {props.todos.length > 0 &&
-                props.todos.map((item) => {
-                    return <li key={item.id}>{item.item}</li>;
-                })}
-            </ul>
         </div>
     );
 };

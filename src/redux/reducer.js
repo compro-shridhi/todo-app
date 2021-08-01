@@ -22,7 +22,7 @@ const addTodoReducer = createSlice({
         updateTodos :(state, action)=>{
             console.log("update reducer called");
             return state.map((todo)=>{
-                if(todo.id === action.payload){
+                if(todo.id === action.payload.id){
                     return{...todo, item:action.payload.item};
                 }
                 return todo;
@@ -31,7 +31,6 @@ const addTodoReducer = createSlice({
         //completed todos send
         completeTodos :(state, action)=>{
             console.log("complete reducer called");
-            console.log("update reducer called");
             return state.map((todo)=>{
                 if(todo.id === action.payload){
                     return{...todo, completed:true};
