@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { connect } from "react-redux";
-import { addTodos, removeTodos, updateTodos, completeTodos } from "../redux/reducer.js";
+import { addTodos } from "../redux/reducer.js";
 
 // to get new state and return state
 const mapStateToProps = (state) => {
@@ -9,13 +9,10 @@ const mapStateToProps = (state) => {
     };
   };
 
-  // to dispatch action object receive from add() function
+// to dispatch action object receive from add() function
 const mapDispatchToProps = (dispatch) => {
     return {
       addTodo: (obj) => dispatch(addTodos(obj)),
-      removeTodo: (id) => dispatch(removeTodos(id)),
-      updateTodo: (obj) => dispatch(updateTodos(obj)),
-      completeTodo: (id) => dispatch(completeTodos(id)),
     };
   };
 
@@ -41,7 +38,6 @@ const Todos = (props) => {
     return(
         <div>
             <input type="text" onChange={e=>settodo(e.target.value)} value={todo}></input>
-            <br/>
             <button onClick={()=>add()}>ADD</button>
         </div>
     );

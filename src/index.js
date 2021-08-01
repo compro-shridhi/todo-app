@@ -1,13 +1,25 @@
+import "./css/main.css"
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Todos from './components/Todos.js'
+import DisplayTodos from './components/DisplayTodos';
+
+function App() {
+    return (
+        <div className="App">
+            <h1>TODO APP</h1>
+            <Todos />
+            <DisplayTodos/>
+        </div>
+    )
+}
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <Todos />
+            <App/>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
