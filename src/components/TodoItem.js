@@ -7,6 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 
+/* ===========css start====================*/
 const useStyles = makeStyles((theme) => ({
   root: {
   },
@@ -29,6 +30,8 @@ const greentheme = createTheme({
   },
 });
 
+/* ===========component start====================*/
+
 const TodoItem = (props) => {
   const classes = useStyles();
 
@@ -40,7 +43,7 @@ const TodoItem = (props) => {
       inputRef.current.disabled = false;
       inputRef.current.focus();
   }
-
+  //to update the todo content
   const update = (id,value,e) =>{
       if(e.which === 13){
           updateTodo({id,item:value});
@@ -50,7 +53,7 @@ const TodoItem = (props) => {
   return (
     <li key={item.id}>
       <TextField id="outlined-multiline-static"  multiline rows={4} label="task" variant="outlined" 
-      className={classes.TextField}
+      className={classes.TextField} color="primary"
       inputRef={inputRef} disabled={inputRef} defaultValue={item.item}
       onKeyPress={(e)=> update(item.id, inputRef.current.value, e)}/>
       {/* <textarea ref={inputRef} disabled={inputRef} defaultValue={item.item}
@@ -62,13 +65,12 @@ const TodoItem = (props) => {
         onClick={()=> changeDisable()}>
           Update
         </Button>
-      
-      <ThemeProvider theme={greentheme}>
-        <Button color="primary" variant="outlined" className={classes.Button} startIcon={<AssignmentTurnedInIcon />}
-        onClick={()=> completeTodo(item.id)}>
-          Complete
-        </Button>
-      </ThemeProvider>
+        <ThemeProvider theme={greentheme}>
+          <Button color="primary" variant="outlined" className={classes.Button} startIcon={<AssignmentTurnedInIcon />}
+          onClick={()=> completeTodo(item.id)}>
+            Complete
+          </Button>
+        </ThemeProvider>
       </ThemeProvider>
       <Button color="secondary" variant="outlined" className={classes.Button} startIcon={<DeleteIcon />} 
       onClick={()=> removeTodo(item.id)}>
