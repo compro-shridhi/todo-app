@@ -40,6 +40,10 @@ const mapDispatchToProps = (dispatch) => {
 const Todos = (props) => {
   const classes = useStyles();
 
+  var today = new Date();
+  var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+  // console.log(date);
+
   const [todo, settodo] = useState("");
   // console.log("props from store", props);
 
@@ -53,6 +57,7 @@ const Todos = (props) => {
         id: Math.floor(Math.random() * 1000),
         item: todo,
         completed: false,
+        task_date: date
       });
       settodo("");
     }

@@ -1,22 +1,29 @@
 import React, { useRef } from "react";
-import Button from '@material-ui/core/Button';
-import {createTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import Chip from '@material-ui/core/Chip';
+import { createTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { green, blue} from '@material-ui/core/colors';
+import { green, blue, red } from '@material-ui/core/colors';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import IconButton from '@material-ui/core/IconButton';
+import DoneIcon from '@material-ui/icons/Done';
 
 /* ===========css start====================*/
 const useStyles = makeStyles((theme) => ({
   root: {
   },
   Button: {
-    padding:'5px 10px',
-    margin:'5px',
+    padding: '5px',
+    margin: '5px',
+    border: '1px solid',
   },
-  TextField:{
+  TextField: {
     width: '39.5ch',
+  },
+  date:{
+    marginLeft:'0px',
+    marginRight:'100px'
   }
 }));
 const bluetheme = createTheme({
@@ -29,55 +36,63 @@ const greentheme = createTheme({
     primary: green,
   },
 });
+const redtheme = createTheme({
+  palette: {
+    primary: red,
+  },
+});
 
 /* ===========component start====================*/
 
 const TodoItem = (props) => {
   const classes = useStyles();
 
-  const { item, updateTodo, removeTodo, completeTodo } = props;
+  const { item, updateTodo, removeTodo, completeTodo, task_date } = props;
 
   // to control the disable button - in complete and update button
   const inputRef = useRef(true);
-  const changeDisable = () =>{
-      inputRef.current.disabled = false;
-      inputRef.current.focus();
+  const changeDisable = () => {
+    inputRef.current.disabled = false;
+    inputRef.current.focus();
   }
   //to update the todo content
-  const update = (id,value,e) =>{
-      if(e.which === 13){
-          updateTodo({id,item:value});
-          inputRef.current.disabled = true;
-      }
+  const update = (id, value, e) => {
+    if (e.which === 13) {
+      updateTodo({ id, item: value });
+      inputRef.current.disabled = true;
+    }
   }
   return (
     <li key={item.id}>
-      <TextField id="outlined-multiline-static"  multiline rows={4} label="task" variant="outlined" 
-      className={classes.TextField} color="primary"
-      inputRef={inputRef} disabled={inputRef} defaultValue={item.item}
-      onKeyPress={(e)=> update(item.id, inputRef.current.value, e)}/>
+      <TextField id="outlined-multiline-static" multiline rows={4} label="task" variant="outlined"
+        className={classes.TextField} color="primary"
+        inputRef={inputRef} disabled={inputRef} defaultValue={item.item}
+        onKeyPress={(e) => update(item.id, inputRef.current.value, e)} />
       {/* <textarea ref={inputRef} disabled={inputRef} defaultValue={item.item}
       onKeyPress={(e)=> update(item.id, inputRef.current.value, e)}>
       </textarea> */}
-      <br/>
+      <br />
+      <Chip className={classes.date} variant="outlined" size="medium" label={task_date} icon={<DoneIcon />} />
       <ThemeProvider theme={bluetheme}>
-        <Button color="primary" variant="outlined" className={classes.Button} startIcon={<EditIcon />}
-        onClick={()=> changeDisable()}>
-          Update
-        </Button>
+        <IconButton color="primary" variant="outlined" className={classes.Button}
+          onClick={() => changeDisable()}>
+          <EditIcon />
+        </IconButton>
         <ThemeProvider theme={greentheme}>
-          <Button color="primary" variant="outlined" className={classes.Button} startIcon={<AssignmentTurnedInIcon />}
-          onClick={()=> completeTodo(item.id)}>
-            Complete
-          </Button>
+          <IconButton color="primary" variant="outlined" className={classes.Button}
+            onClick={() => completeTodo(item.id)}>
+            <AssignmentTurnedInIcon />
+          </IconButton>
+        </ThemeProvider>
+        <ThemeProvider theme={redtheme}>
+          <IconButton color="primary" variant="outlined" className={classes.Button}
+            onClick={() => removeTodo(item.id)}>
+            <DeleteIcon />
+          </IconButton>
         </ThemeProvider>
       </ThemeProvider>
-      <Button color="secondary" variant="outlined" className={classes.Button} startIcon={<DeleteIcon />} 
-      onClick={()=> removeTodo(item.id)}>
-        Delete
-      </Button>
       {""}
-  </li>
+    </li>
   );
 };
 

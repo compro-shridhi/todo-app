@@ -108,6 +108,7 @@ const DisplayTodos = (props) => {
                                                     removeTodo={props.removeTodo}
                                                     updateTodo={props.updateTodo}
                                                     completeTodo={props.completeTodo}
+                                                    task_date={item.task_date}
                                                 />
                                             </Paper>
                                         </Grid>
@@ -130,6 +131,7 @@ const DisplayTodos = (props) => {
                                                     removeTodo={props.removeTodo}
                                                     updateTodo={props.updateTodo}
                                                     completeTodo={props.completeTodo}
+                                                    task_date={item.task_date}
                                                 />
                                             </Paper>
                                         </Grid>
@@ -151,6 +153,7 @@ const DisplayTodos = (props) => {
                                                 removeTodo={props.removeTodo}
                                                 updateTodo={props.updateTodo}
                                                 completeTodo={props.completeTodo}
+                                                task_date={item.task_date}
                                             />
                                         </Paper>
                                     </Grid>
